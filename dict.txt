@@ -4,6 +4,7 @@ air:aire
 all:todas
 alone:solos
 and:y
+are:están
 beautiful:hermosa
 believe:creen
 better:mejor
@@ -46,7 +47,7 @@ gave:dio
 go:ir, van
 gold:oro
 good:bueno
-Gothic:gótica
+gothic:gótica
 gray:gris
 green:verde
 has:tiene
@@ -57,7 +58,6 @@ help:ayudar
 honeymoon:luna de miel
 I see:veo
 I write:escribo
-in the:del
 in:en, por
 individuals:individuos
 is:es, está
@@ -79,6 +79,7 @@ northeast:noroeste
 now:ahora
 ocean:mar
 of:de
+of the:del
 on:sobre
 or:o
 others:otros
@@ -103,19 +104,22 @@ situated:situada
 small:pequeña, pequeños
 snout:hocico
 some:algunos
-Spain:España
+spain:españa
 stones:piedras
 strong:fuertes
 surrounded:rodeado
-that:que
-the middle:media
+than:que
+that:que, de que
+the middle:medio, media
 the:el, la, los, las, lo
+them:ellos
 there are:hay
 there exists:existe
+they are:los hay
 they want:quieren
 this:esta
 to you:te
-to:a, le
+to:a, le, para
 train:tren
 true:verdad
 very:muy
