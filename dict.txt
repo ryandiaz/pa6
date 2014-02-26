@@ -1,0 +1,132 @@
+a:una,un
+afternoon:tarde
+air:aire
+all:todas
+alone:solos
+and:y
+beautiful:hermosa
+believe:creen
+better:mejor
+big:grande
+birthday:aniversario
+books:libros
+bottles:botellas
+breathe:respirar
+brother:hermano
+building:edificio
+but:pero
+calm:tranquila
+can:puede
+cathedral:catedral
+celebration:celebración
+chemicals:químicos
+city:ciudad
+close:cercanas
+color:color
+consult:consultar
+couples:parejas
+dangerous:peligrosos
+day:día
+distance:distancia
+does not:no
+doubt:dudan, duda
+dream:sueño
+emit:emiten
+experts:expertos
+eyes:ojos
+fall:caer
+families:familias
+famous:famoso
+fear:miedo
+find:encontrar
+for:para
+form:forma
+from:desde
+gave:dio
+go:ir, van
+gold:oro
+good:bueno
+Gothic:gótica
+gray:gris
+green:verde
+has:tiene
+have:tiene
+head:cabeza
+healthy:saludable
+help:ayudar
+honeymoon:luna de miel
+I see:veo
+I write:escribo
+in the:del
+in:en, por
+individuals:individuos
+is:es, está
+it is:hace
+José:josé
+kind:especie
+legs:patas
+library:biblioteca
+long:largas
+many:muchos
+materials:materiales
+Monday:lunes
+most:más
+mountains:montañas
+my:mi
+nails:uñas
+nationalities:nacionalidades
+northeast:noroeste
+now:ahora
+ocean:mar
+of:de
+on:sobre
+or:o
+others:otros
+plant:planta
+plastic:plásticos, plástico
+sharp:puntiagudo
+pure:puro
+races:razas
+raindrops:las gotas de lluvia
+rainy:lluvioso
+read:leer
+realized:realizado
+realizes:se da cuenta
+retirement:jubilación
+rite:rito
+room:habitación
+rumor:rumor
+safety:seguridad
+short:cortas
+silver:plata
+situated:situada
+small:pequeña, pequeños
+snout:hocico
+some:algunos
+Spain:España
+stones:piedras
+strong:fuertes
+surrounded:rodeado
+that:que
+the middle:media
+the:el, la, los, las, lo
+there are:hay
+there exists:existe
+they want:quieren
+this:esta
+to you:te
+to:a, le
+train:tren
+true:verdad
+very:muy
+water:agua
+we:nos, nosotros
+we left:nos fuimos
+weddings:bodas
+wheat:trigo
+when:cuando
+where:donde
+with:con
+without:sin
+world:mundo
+you can:se puede
