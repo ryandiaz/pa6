@@ -20,8 +20,6 @@ def decodeLine(lines):
         translation = line.split(':')
         eng = translation[0]
         esp = translation[1].split(', ')
-        #eng = line[0:line.index(":")]
-        #esp = line[line.index(":")+1:]
         dict[eng] = esp
     return dict
 
@@ -30,13 +28,8 @@ def trainModel():
     totalwords = abc.words() #+ genesis.words() + gutenberg.words() + webtext.words()
     estimator = lambda fdist, bins: LidstoneProbDist(fdist, 0.2)
     BigramModel = NgramModel(2, totalwords)
-    print 'bigram done training'
     UnigramModel = NgramModel(1, totalwords)
     return (UnigramModel, BigramModel)
-#def tokenize(doc):
-   # nltk.tokenize
-
-
 
 
 def main():
@@ -51,13 +44,11 @@ def main():
     for key in dict:
         keyList = dict[key]
         for val in keyList:
-  #          print val
             if val in revDict:
                 revDict[val].append(key)
             else: 
                 revDict[val] = [key]
- #   print revDict
-    in_file = "./dev_set.txt"
+    in_file = "./test_set.txt"
     doc = loadList(in_file)
 
     (UnigramModel, BigramModel) = trainModel()
@@ -66,9 +57,12 @@ def main():
     adjectives = ['JJR', 'JJS', 'JJ']
     adverbs = ['RB', 'RBS', 'RBR']
     conjunctions = ['CC']
+    verbs = ['VB','VBD','VBG','VBN','VBP','VBZ']
+
 
     for line in doc:
         print line
+        punctuation = line[-1] 
         words = line.split()
         newWords = []
         spanWords = []
@@ -78,34 +72,44 @@ def main():
             word = word.replace("?", "")
             word = word.replace("!", "")
             word = word.replace(";", "")
+            word = word.replace(":", "")
             word = word.lower()
             spanWords.append(word)
 
-        for tsize in range(4,1,-1):#range(2,5):
-            for i in range(0, len(spanWords)-tsize+1):
+
+        for tsize in range(4,1,-1):
+            ilimit = len(spanWords) - tsize
+            i = 0
+            span1 = []
+            
+            while i < ilimit:
                 phrase = ' '.join(spanWords[i:i+tsize])
                 if(phrase in revDict):
-                    spanWords[i] = phrase
+                    span1.append(phrase)
+                    i += tsize
+                    continue
+                span1.append(spanWords[i])
+                i += 1
 
-                    # newWords[i+1:i+tsize] = [""]*(tsize-1)
-        position = 0
+            span1 += spanWords[i:]
+            spanWords = span1
+
         for word in spanWords:
+            
             if word in revDict:
                 nw = revDict[word][0]
                 if len(revDict[word]) > 1:
                     maxW = ''
                     maxP = 0.0
-                    print word, '::>', revDict[word]
-                    if position > 0:
+                    if len(newWords) > 0:
                         
                         for ambW in revDict[word]:
-
-                            p = BigramModel.prob(ambW,[newWords[position]])
-                            # print ambW, newWords[position], p
+                            
+                            p = BigramModel.prob(ambW,[newWords[-1]])
+                            
                             if p > maxP:
                                 maxP = p
                                 maxW = ambW
-                        print maxW
                     else:
                         for ambW in revDict[word]:
 
@@ -113,44 +117,38 @@ def main():
                             if p > maxP:
                                 p = maxP
                                 maxW = ambW
-                    nw = maxW #random.choice(revDict[word])
+                    nw = maxW 
 
                 if len(nw.split()) > 1:
                     nws = nw.split()
-                    for w in nws: newWords.append(w)
+                    for w in nws: 
+                        newWords.append(w)
+                        
                 else:    
                     newWords.append(nw)
-                position += 1
+                
         newWords = filter(lambda a: a != '', newWords)
         posTags = nltk.pos_tag(newWords)
-        print posTags
-        # print newWords
-        # print 'diff in length= ', len(posTags) - len(newWords)
         reorderedWords = []
-        # for i in range(0, len(posTags) - 1):
+        # specific word reorderings
         i = 0
         while i < len(posTags) - 2:
-            # print i
             
             if i < len(posTags) - 2:
                 if posTags[i][1] in nouns and posTags[i+1][1] in adverbs and posTags[i+2][1] in adjectives:
-                    # buf = newWords[i]
-                    # del newWords[i]
-                    # newWords.insert(i+2,buf)
                     reorderedWords +=[posTags[i+2][0], posTags[i+1][0], posTags[i][0]]
                     i += 3
                     continue
-                    # print 'inserted at ', i+2
                 if posTags[i][1] in nouns and posTags[i+1][0] == 'of' and posTags[i+2][1] in adjectives:
                     reorderedWords += [posTags[i+2][0], posTags[i][0]]
                     i += 3
                     continue
+                if posTags[i][0] == 'see' and posTags[i+1][1] in verbs and posTags[i+2][1] in nouns:
+                    reorderedWords += [posTags[i+2][0], posTags[i+2][0], posTags[i+1][0]]
+                    i+=3 
+                    continue
             if i < len(posTags) - 3:
                 if posTags[i][1] in nouns and posTags[i+1][1] in adjectives and posTags[i+2][1] in conjunctions and posTags[i+3][1] in adjectives:
-                    # buf = newWords[i]
-                    # del newWords[i]
-                    # newWords.insert(i+3,buf)
-                    # print 'inserted at ', i+3
                     reorderedWords += [posTags[i+1][0], posTags[i+2][0], posTags[i+3][0], posTags[i][0]]
                     i += 4
                     continue
@@ -164,11 +162,7 @@ def main():
         posTags = nltk.pos_tag(newWords)
         i = 0
         while i < len(posTags) - 1:
-        # for i in range(len(posTags)-1):
             if posTags[i][1] in nouns and posTags[i+1][1] in adjectives:
-                # buf = newWords[i]
-                # newWords[i] = newWords[i+1]
-                # newWords[i+1] = buf 
                 reorderedWords += [posTags[i+1][0], posTags[i][0]]
                 i += 2
                 continue
@@ -176,21 +170,15 @@ def main():
             i += 1
  
 
-            # else:
-            #     newWords.append("nothing_yet")
         reorderedWords += newWords[i:]
         newWords = reorderedWords
         newWords = filter(lambda a: a != '', newWords)
-        print ' '.join(newWords)
+        newSentence = ' '.join(newWords)
+        newSentence = newSentence[0].upper() + newSentence[1:]
+        newSentence.append(punctuation)
+        print newSentence
         print '  ' 
         sentence = ""
-  #      for word in newWords:
-   #         sentence = sentence + word + " "
-    #    print sentence
-
-
-
-    #docTokenized = tokenize(doc)
 
 
 

@@ -1,7 +1,7 @@
-a:una,un
+a:una, un
 afternoon:tarde
 air:aire
-all:todas
+all:todas, todo
 alone:solos
 and:y
 are:están
@@ -64,10 +64,11 @@ is:es, está
 it is:hace
 José:josé
 kind:especie
+left:fuimos
 legs:patas
 library:biblioteca
 long:largas
-many:muchos
+many:muchos, muchas
 materials:materiales
 Monday:lunes
 most:más
@@ -75,7 +76,7 @@ mountains:montañas
 my:mi
 nails:uñas
 nationalities:nacionalidades
-northeast:noroeste
+northwest:noroeste
 now:ahora
 ocean:mar
 of:de
@@ -112,14 +113,15 @@ than:que
 that:que, de que
 the middle:medio, media
 the:el, la, los, las, lo
-them:ellos
+them:ellos, las
 there are:hay
 there exists:existe
 they are:los hay
 they want:quieren
-this:esta
+this:esta, este
 to you:te
 to:a, le, para
+to travel:viajar
 train:tren
 true:verdad
 very:muy
