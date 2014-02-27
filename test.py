@@ -126,41 +126,60 @@ def main():
         print posTags
         # print newWords
         # print 'diff in length= ', len(posTags) - len(newWords)
-        for i in range(0, len(posTags) - 1):
+        reorderedWords = []
+        # for i in range(0, len(posTags) - 1):
+        i = 0
+        while i < len(posTags) - 2:
             # print i
             
             if i < len(posTags) - 2:
                 if posTags[i][1] in nouns and posTags[i+1][1] in adverbs and posTags[i+2][1] in adjectives:
-                    buf = newWords[i]
-                    # print posTags[i][0]
-                    # print newWords[i] 
-                    # print 'deleting : ', buf
-                    del newWords[i]
-                    newWords.insert(i+2,buf)
+                    # buf = newWords[i]
+                    # del newWords[i]
+                    # newWords.insert(i+2,buf)
+                    reorderedWords +=[posTags[i+2][0], posTags[i+1][0], posTags[i][0]]
+                    i += 3
+                    continue
                     # print 'inserted at ', i+2
                 if posTags[i][1] in nouns and posTags[i+1][0] == 'of' and posTags[i+2][1] in adjectives:
-                    newWords[i:i+3] = [posTags[i+2][0], '' ,posTags[i][0]]
+                    reorderedWords += [posTags[i+2][0], posTags[i][0]]
+                    i += 3
+                    continue
             if i < len(posTags) - 3:
                 if posTags[i][1] in nouns and posTags[i+1][1] in adjectives and posTags[i+2][1] in conjunctions and posTags[i+3][1] in adjectives:
-                    buf = newWords[i]
-                    # print posTags[i][0]
-                    # print newWords[i]
-                    # print 'deleting: ', buf
-                    del newWords[i]
-                    newWords.insert(i+3,buf)
+                    # buf = newWords[i]
+                    # del newWords[i]
+                    # newWords.insert(i+3,buf)
                     # print 'inserted at ', i+3
+                    reorderedWords += [posTags[i+1][0], posTags[i+2][0], posTags[i+3][0], posTags[i][0]]
+                    i += 4
+                    continue
+            reorderedWords += [posTags[i][0]]
+            i += 1
+
+        reorderedWords += newWords[i:]
+
+        newWords = reorderedWords
+        reorderedWords = []             
         posTags = nltk.pos_tag(newWords)
-                   
-        for i in range(len(posTags)-1):
+        i = 0
+        while i < len(posTags) - 1:
+        # for i in range(len(posTags)-1):
             if posTags[i][1] in nouns and posTags[i+1][1] in adjectives:
-                buf = newWords[i]
-                newWords[i] = newWords[i+1]
-                newWords[i+1] = buf        
+                # buf = newWords[i]
+                # newWords[i] = newWords[i+1]
+                # newWords[i+1] = buf 
+                reorderedWords += [posTags[i+1][0], posTags[i][0]]
+                i += 2
+                continue
+            reorderedWords += [posTags[i][0]]      
+            i += 1
  
 
             # else:
             #     newWords.append("nothing_yet")
-        
+        reorderedWords += newWords[i:]
+        newWords = reorderedWords
         newWords = filter(lambda a: a != '', newWords)
         print ' '.join(newWords)
         print '  ' 
